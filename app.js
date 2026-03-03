@@ -53,6 +53,9 @@ const errorMessage = document.getElementById('error-message');
 const themeBtn = document.getElementById('theme-btn');
 const moonIcon = document.getElementById('moon-icon');
 const sunIcon = document.getElementById('sun-icon');
+const fullscreenBtn = document.getElementById('fullscreen-btn');
+const expandIcon = document.getElementById('expand-icon');
+const compressIcon = document.getElementById('compress-icon');
 
 // ============================================
 // SPOTIFY AUTH (PKCE Flow)
@@ -382,6 +385,26 @@ function loadTheme() {
     }
 }
 
+function toggleFullscreen() {
+    if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(err => {
+            showError('Fullscreen not supported');
+        });
+    } else {
+        document.exitFullscreen();
+    }
+}
+
+function updateFullscreenIcon() {
+    if (document.fullscreenElement) {
+        expandIcon.classList.add('hidden');
+        compressIcon.classList.remove('hidden');
+    } else {
+        expandIcon.classList.remove('hidden');
+        compressIcon.classList.add('hidden');
+    }
+}
+
 function setControlsLoading(loading) {
     const controls = [prevBtn, playPauseBtn, nextBtn];
     controls.forEach(btn => {
@@ -438,6 +461,10 @@ logoutBtn.addEventListener('click', () => {
 });
 
 themeBtn.addEventListener('click', toggleTheme);
+
+fullscreenBtn.addEventListener('click', toggleFullscreen);
+
+document.addEventListener('fullscreenchange', updateFullscreenIcon);
 
 playPauseBtn.addEventListener('click', async () => {
     setControlsLoading(true);
