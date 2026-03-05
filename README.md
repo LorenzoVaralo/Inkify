@@ -54,14 +54,14 @@ https://<username>.github.io/inkify/
 
 ## Local Development
 
-For local testing, add `http://localhost:8000/` as an additional Redirect URI in Spotify, then:
+For local testing, add `http://127.0.0.1:8000/` as an additional Redirect URI in Spotify, then:
 
 ```bash
 cd inkify
 python3 -m http.server 8000
 ```
 
-Open http://localhost:8000 in your browser.
+Open <http://127.0.0.1:8000> in your browser.
 
 ## Usage
 
@@ -79,13 +79,16 @@ Open http://localhost:8000 in your browser.
 ## Troubleshooting
 
 **"No music playing" message:**
+
 - Make sure Spotify is open and playing on a device
 
 **Controls not working:**
+
 - Spotify Premium is required
 - Ensure the Spotify app is active (not just background)
 
 **Authentication errors:**
+
 - Verify the Redirect URI matches exactly (including trailing slash)
 - Check that your Client ID is correct
 - Make sure you're accessing via HTTPS (or localhost for development)
